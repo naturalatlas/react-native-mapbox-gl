@@ -14,6 +14,7 @@ public class Sprite {
     public static final String LOG_TAG = Sprite.class.getSimpleName();
     private String name;
     private String url;
+    private Bitmap bitmap;
 
     public Sprite(String name, String url) {
         this.name = name;
@@ -28,6 +29,10 @@ public class Sprite {
         return url;
     }
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
     public void load(Context context, MapboxMap map) {
         double scale =  context.getResources().getDisplayMetrics().density;
         ImageEntry imageEntry = new ImageEntry(url, scale);
@@ -35,7 +40,8 @@ public class Sprite {
         final WeakReference<MapboxMap> weakMap = new WeakReference<>(map);
         DownloadMapImageTask task = new DownloadMapImageTask(context, map, new DownloadMapImageTask.OnAllImagesLoaded() {
             @Override
-            public void onAllImagesLoaded() {
+            public void onAllImagesLoaded(Map<String, Bitmap> images) {
+                bitmap = images.get(name);
                 if (weakMap.get() != null && weakMap.get().getStyle() == null) {
                     Log.w(LOG_TAG,"Tried to load extra sprite " + getName() +" before style loaded");
                 }

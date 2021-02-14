@@ -543,6 +543,10 @@ RCT_EXPORT_METHOD(showAttribution:(nonnull NSNumber *)reactTag
 -(UIImage *)mapView:(MGLMapView *)mapView didFailToLoadImage:(NSString *)imageName
 {
     RCTMGLMapView* reactMapView = ((RCTMGLMapView *) mapView);
+    RCTMGLSprite* existingSprite = reactMapView.extraSprites[imageName];
+    if (existingSprite && existingSprite.image) {
+      return existingSprite.image;
+    }
     NSArray<RCTMGLShapeSource *> *shapeSources = [reactMapView getAllShapeSources];
     for (RCTMGLShapeSource *shapeSource in shapeSources) {
         if([shapeSource addMissingImageToStyle:imageName]) {

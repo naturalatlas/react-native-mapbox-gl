@@ -688,6 +688,12 @@ public class RCTMGLMapView extends MapView implements
 
     @Override
     public void onStyleImageMissing(@NonNull String id) {
+        Sprite sprite = mExtraSprites.get(id);
+        if (sprite != null && sprite.getBitmap() != null) {
+            Style style = mMap.getStyle();
+            if (style != null) style.addImage(id, sprite.getBitmap());
+            return;
+        }
         List<RCTMGLShapeSource> allShapeSources = getAllShapeSources();
         for (RCTMGLShapeSource shapeSource : allShapeSources) {
             if (shapeSource.addMissingImageToStyle(id)) {

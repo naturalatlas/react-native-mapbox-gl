@@ -40,7 +40,7 @@ public class DownloadMapImageTask extends AsyncTask<Map.Entry<String, ImageEntry
     }
 
     public interface OnAllImagesLoaded {
-        void onAllImagesLoaded();
+        void onAllImagesLoaded(Map<String, Bitmap> images);
     }
 
     @SafeVarargs
@@ -85,10 +85,10 @@ public class DownloadMapImageTask extends AsyncTask<Map.Entry<String, ImageEntry
     @Override
     protected void onPostExecute(List<Map.Entry<String, Bitmap>> images) {
         MapboxMap map = mMap.get();
+        HashMap<String, Bitmap> bitmapImages = new HashMap<>();
         if (map != null && images != null && images.size() > 0) {
             Style style = map.getStyle();
             if (style != null) {
-                HashMap<String, Bitmap> bitmapImages = new HashMap<>();
                 for (Map.Entry<String, Bitmap> image : images) {
                     bitmapImages.put(image.getKey(), image.getValue());
                 }
@@ -97,7 +97,7 @@ public class DownloadMapImageTask extends AsyncTask<Map.Entry<String, ImageEntry
         }
 
         if (mCallback != null) {
-            mCallback.onAllImagesLoaded();
+            mCallback.onAllImagesLoaded(bitmapImages);
         }
     }
 
