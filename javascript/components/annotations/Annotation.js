@@ -1,9 +1,10 @@
 import React from 'react';
-import {Easing} from 'react-native';
+import {Easing, Animated} from 'react-native';
 import PropTypes from 'prop-types';
-
-import MapboxGL from '../../index';
 import AnimatedPoint from '../../utils/AnimatedPoint';
+import ShapeSource from '../ShapeSource';
+
+const AnimatedShapeSource = Animated.createAnimatedComponent(ShapeSource);
 
 class Annotation extends React.Component {
   static propTypes = {
@@ -105,7 +106,7 @@ class Annotation extends React.Component {
     }
 
     return (
-      <MapboxGL.Animated.ShapeSource
+      <AnimatedShapeSource
         id={this.props.id}
         ref="source"
         onPress={this.onPress}
@@ -118,7 +119,7 @@ class Annotation extends React.Component {
           />
         )}
         {this.props.children}
-      </MapboxGL.Animated.ShapeSource>
+      </AnimatedShapeSource>
     );
   }
 }
