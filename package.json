@@ -1,10 +1,7 @@
 {
-  "name": "@react-native-mapbox-gl/maps",
+  "name": "@naturalatlas/react-native-mapbox-gl",
   "description": "A Mapbox GL react native module for creating custom maps",
   "version": "7.0.0-rc3",
-  "publishConfig": {
-    "access": "public"
-  },
   "author": "React Native Mapbox Team",
   "main": "./javascript/index.js",
   "keywords": [

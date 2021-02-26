@@ -42,3 +42,5 @@ android/local.properties
 example
 __tests__
 coverage
+ios/Mapbox.framework
+*.tgz

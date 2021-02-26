@@ -26,21 +26,22 @@ RCT_EXPORT_METHOD(takeSnap:(NSDictionary *)jsOptions
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         MGLMapSnapshotOptions *options = [self _getOptions:jsOptions];
-        MGLMapSnapshotter *snapshotter = [[MGLMapSnapshotter alloc] initWithOptions:options];
-        
+        __block MGLMapSnapshotter *snapshotter = [[MGLMapSnapshotter alloc] initWithOptions:options];
+
         [snapshotter startWithCompletionHandler:^(MGLMapSnapshot *snapshot, NSError *err) {
             if (err != nil) {
                 reject(@"takeSnap", @"Could not create snapshot", err);
+                snapshotter = nil;
                 return;
             }
-            
+
             NSString *result = nil;
             if ([jsOptions[@"writeToDisk"] boolValue]) {
                 result = [RNMBImageUtils createTempFile:snapshot.image];
             } else {
                 result = [RNMBImageUtils createBase64:snapshot.image];
             }
-            
+            snapshotter = nil;
             resolve(result);
         }];
     });
@@ -49,25 +50,25 @@ RCT_EXPORT_METHOD(takeSnap:(NSDictionary *)jsOptions
 - (MGLMapSnapshotOptions *)_getOptions:(NSDictionary *)jsOptions
 {
     MGLMapCamera *camera = [[MGLMapCamera alloc] init];
-    
+
     camera.pitch = [jsOptions[@"pitch"] doubleValue];
     camera.heading = [jsOptions[@"heading"] doubleValue];
-    
+
     if (jsOptions[@"centerCoordinate"] != nil) {
         camera.centerCoordinate = [RCTMGLUtils fromFeature:jsOptions[@"centerCoordinate"]];
     }
-    
+
     NSNumber *width = jsOptions[@"width"];
     NSNumber *height = jsOptions[@"height"];
     CGSize size = CGSizeMake([width doubleValue], [height doubleValue]);
-    
+
     MGLMapSnapshotOptions *options = [[MGLMapSnapshotOptions alloc] initWithStyleURL:[NSURL URLWithString:jsOptions[@"styleURL"]]
                                                                    camera:camera
                                                                    size:size];
     if (jsOptions[@"zoomLevel"] != nil) {
         options.zoomLevel = [jsOptions[@"zoomLevel"] doubleValue];
     }
-    
+
     if (jsOptions[@"bounds"] != nil) {
         options.coordinateBounds = [RCTMGLUtils fromFeatureCollection:jsOptions[@"bounds"]];
     }
