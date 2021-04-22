@@ -21,6 +21,10 @@ RCT_EXPORT_VIEW_PROPERTY(id, NSString);
 }
 
 RCT_EXPORT_VIEW_PROPERTY(url, NSString);
+RCT_EXPORT_VIEW_PROPERTY(tileUrlTemplates, NSArray<NSString *>);
+RCT_EXPORT_VIEW_PROPERTY(sourceBounds, NSArray<NSNumber *>);
+RCT_EXPORT_VIEW_PROPERTY(minZoomLevel, float);
+RCT_EXPORT_VIEW_PROPERTY(maxZoomLevel, float);
 RCT_EXPORT_VIEW_PROPERTY(hasPressListener, BOOL)
 RCT_REMAP_VIEW_PROPERTY(onMapboxVectorSourcePress, onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(hitbox, NSDictionary)

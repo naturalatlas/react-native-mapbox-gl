@@ -28,6 +28,11 @@ class VectorSource extends AbstractSource {
      */
     url: PropTypes.string,
 
+    tileUrlTemplates: PropTypes.arrayOf(PropTypes.string),
+    bounds: PropTypes.arrayOf(PropTypes.number),
+    minZoomLevel: PropTypes.number,
+    maxZoomLevel: PropTypes.number,
+
     /**
      * Source press listener, gets called when a user presses one of the children layers only
      * if that layer has a higher z-index than another source layers
@@ -51,6 +56,10 @@ class VectorSource extends AbstractSource {
     const props = {
       id: this.props.id,
       url: this.props.url,
+      tileUrlTemplates: this.props.tileUrlTemplates,
+      minZoomLevel: this.props.minZoomLevel,
+      maxZoomLevel: this.props.maxZoomLevel,
+      sourceBounds: this.props.bounds,
       hitbox: this.props.hitbox,
       hasPressListener: isFunction(this.props.onPress),
       onMapboxVectorSourcePress: this.props.onPress,

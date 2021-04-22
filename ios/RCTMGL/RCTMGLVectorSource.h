@@ -12,5 +12,9 @@
 @interface RCTMGLVectorSource : RCTMGLSource
 
 @property (nonatomic, copy) NSString *url;
+@property (nonatomic, strong) NSArray<NSString *> *tileUrlTemplates;
+@property (nonatomic, strong) NSArray<NSNumber *> *sourceBounds;
+@property (nonatomic, assign) float minZoomLevel;
+@property (nonatomic, assign) float maxZoomLevel;
 
 @end
