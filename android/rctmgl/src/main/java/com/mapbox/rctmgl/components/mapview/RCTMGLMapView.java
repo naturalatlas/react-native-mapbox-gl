@@ -410,7 +410,7 @@ public class RCTMGLMapView extends MapView implements OnMapReadyCallback, Mapbox
     }
 
     public void waitForLayer(String layerID, FoundLayerCallback callback) {
-        Layer layer = mMap.getStyle().getLayer(layerID);
+        Layer layer = mMap.getStyle() == null ? null : mMap.getStyle().getLayer(layerID);
         if (layer != null) {
             callback.found(layer);
         } else {

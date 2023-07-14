@@ -154,6 +154,9 @@ public abstract class RCTLayer<T extends Layer> extends AbstractMapFeature {
             return;
         }
         if (getStyle() == null) return;
+        if (getStyle().getLayer(mID) != null) {
+            return; // prevent adding a layer twice
+        }
 
         String userBackgroundID = LocationComponentConstants.BACKGROUND_LAYER;
         Layer userLocationBackgroundLayer = getStyle().getLayer(userBackgroundID);
@@ -176,6 +179,9 @@ public abstract class RCTLayer<T extends Layer> extends AbstractMapFeature {
                     return;
                 }
                 if (getStyle() == null) return;
+                if (getStyle().getLayer(mID) != null) {
+                    return; // prevent adding a layer twice
+                }
                 getStyle().addLayerAbove(mLayer, aboveLayerID);
                 mMapView.layerAdded(mLayer);
             }
@@ -189,6 +195,9 @@ public abstract class RCTLayer<T extends Layer> extends AbstractMapFeature {
                     return;
                 }
                 if (getStyle() == null) return;
+                if (getStyle().getLayer(mID) != null) {
+                    return; // prevent adding a layer twice
+                }
                 getStyle().addLayerBelow(mLayer, belowLayerID);
                 mMapView.layerAdded(mLayer);
             }
@@ -200,6 +209,9 @@ public abstract class RCTLayer<T extends Layer> extends AbstractMapFeature {
             return;
         }
         if (getStyle() == null) return;
+        if (getStyle().getLayer(mID) != null) {
+            return; // prevent adding a layer twice
+        }
         int layerSize = getStyle().getLayers().size();
         if (index >= layerSize) {
             FLog.e(LOG_TAG, "Layer index is greater than number of layers on map. Layer inserted at end of layer stack.");
