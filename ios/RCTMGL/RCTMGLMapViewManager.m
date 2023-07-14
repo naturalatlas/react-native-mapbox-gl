@@ -48,8 +48,17 @@ RCT_EXPORT_MODULE(RCTMGLMapView)
 
     // setup map gesture recongizers
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
+
     doubleTap.numberOfTapsRequired = 2;
-    
+    for (UIGestureRecognizer *gestureRecognizer in mapView.gestureRecognizers) {
+        if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class]) {
+            UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *) gestureRecognizer;
+            if (tapGestureRecognizer.numberOfTapsRequired > 1) {
+                doubleTap = tapGestureRecognizer;
+            }
+        }
+    }
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapMap:)];
     [tap requireGestureRecognizerToFail:doubleTap];
     
@@ -64,7 +73,7 @@ RCT_EXPORT_MODULE(RCTMGLMapView)
         }
     }
     
-    [mapView addGestureRecognizer:doubleTap];
+    // [mapView addGestureRecognizer:doubleTap];
     [mapView addGestureRecognizer:tap];
     [mapView addGestureRecognizer:longPress];
     
