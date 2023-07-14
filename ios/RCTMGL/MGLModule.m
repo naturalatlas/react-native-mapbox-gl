@@ -34,12 +34,12 @@ RCT_EXPORT_MODULE();
     }
     [styleURLS setObject:[[MGLStyle defaultStyleURL] absoluteString] forKey:@"Default"];
 #else
-    [styleURLS setObject:[MGLStyle.streetsStyleURL absoluteString] forKey:@"Street"];
-    [styleURLS setObject:[MGLStyle.darkStyleURL absoluteString] forKey:@"Dark"];
-    [styleURLS setObject:[MGLStyle.lightStyleURL absoluteString] forKey:@"Light"];
-    [styleURLS setObject:[MGLStyle.outdoorsStyleURL absoluteString] forKey:@"Outdoors"];
-    [styleURLS setObject:[MGLStyle.satelliteStyleURL absoluteString] forKey:@"Satellite"];
-    [styleURLS setObject:[MGLStyle.satelliteStreetsStyleURL absoluteString] forKey:@"SatelliteStreet"];
+    // [styleURLS setObject:[MGLStyle.streetsStyleURL absoluteString] forKey:@"Street"];
+    // [styleURLS setObject:[MGLStyle.darkStyleURL absoluteString] forKey:@"Dark"];
+    // [styleURLS setObject:[MGLStyle.lightStyleURL absoluteString] forKey:@"Light"];
+    // [styleURLS setObject:[MGLStyle.outdoorsStyleURL absoluteString] forKey:@"Outdoors"];
+    // [styleURLS setObject:[MGLStyle.satelliteStyleURL absoluteString] forKey:@"Satellite"];
+    // [styleURLS setObject:[MGLStyle.satelliteStreetsStyleURL absoluteString] forKey:@"SatelliteStreet"];
 #endif
 
     // event types
@@ -253,7 +253,7 @@ RCT_EXPORT_METHOD(setAccessToken:(NSString *)accessToken)
       [MGLSettings setApiKey:accessToken];
     }
 #else
-    [MGLAccountManager setAccessToken:accessToken];
+    // [MGLAccountManager setAccessToken:accessToken];
 #endif
 }
 
@@ -272,7 +272,7 @@ RCT_EXPORT_METHOD(getAccessToken:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
 #ifdef RNMGL_USE_MAPLIBRE
     NSString* accessToken = MGLSettings.apiKey;
 #else
-    NSString *accessToken = MGLAccountManager.accessToken;
+    NSString *accessToken = nil; // MGLAccountManager.accessToken
 #endif
 
     if (accessToken != nil) {

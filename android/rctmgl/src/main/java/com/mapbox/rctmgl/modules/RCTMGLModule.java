@@ -10,7 +10,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.module.annotations.ReactModule;
-import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
+// import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import com.mapbox.mapboxsdk.Mapbox;
 // import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.style.layers.Property;
@@ -61,14 +61,14 @@ public class RCTMGLModule extends ReactContextBaseJavaModule {
     public Map<String, Object> getConstants() {
         // map style urls
         Map<String, String> styleURLS = new HashMap<>();
-        styleURLS.put("Street", Style.MAPBOX_STREETS);
-        styleURLS.put("Dark", Style.DARK);
-        styleURLS.put("Light", Style.LIGHT);
-        styleURLS.put("Outdoors", Style.OUTDOORS);
-        styleURLS.put("Satellite", Style.SATELLITE);
-        styleURLS.put("SatelliteStreet", Style.SATELLITE_STREETS);
-        styleURLS.put("TrafficDay", Style.TRAFFIC_DAY);
-        styleURLS.put("TrafficNight", Style.TRAFFIC_NIGHT);
+        // styleURLS.put("Street", Style.MAPBOX_STREETS);
+        // styleURLS.put("Dark", Style.DARK);
+        // styleURLS.put("Light", Style.LIGHT);
+        // styleURLS.put("Outdoors", Style.OUTDOORS);
+        // styleURLS.put("Satellite", Style.SATELLITE);
+        // styleURLS.put("SatelliteStreet", Style.SATELLITE_STREETS);
+        // styleURLS.put("TrafficDay", Style.TRAFFIC_DAY);
+        // styleURLS.put("TrafficNight", Style.TRAFFIC_NIGHT);
 
         // events
         Map<String, String> eventTypes = new HashMap<>();
@@ -286,12 +286,14 @@ public class RCTMGLModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setAccessToken(final String accessToken) {
+        /*
         mReactContext.runOnUiQueueThread(new Runnable() {
             @Override
             public void run() {
                 Mapbox.getInstance(getReactApplicationContext(), accessToken);
             }
         });
+        */
     }
 
     @ReactMethod
@@ -324,16 +326,20 @@ public class RCTMGLModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getAccessToken(Promise promise) {
+        /*
         String token = Mapbox.getAccessToken();
         if(token == null) {
             promise.reject("missing_access_token", "No access token has been set");
         } else {
             promise.resolve(token);
         }
+        */
+        promise.reject("missing_access_token", "No access token has been set");
     }
 
     @ReactMethod
     public void setTelemetryEnabled(final boolean telemetryEnabled) {
+        /*
         mReactContext.runOnUiQueueThread(new Runnable() {
             @Override
             public void run() {
@@ -341,6 +347,7 @@ public class RCTMGLModule extends ReactContextBaseJavaModule {
                 telemetry.setUserTelemetryRequestState(telemetryEnabled);
             }
         });
+        */
     }
 
     @ReactMethod
