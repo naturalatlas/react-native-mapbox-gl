@@ -86,7 +86,7 @@ Pod::Spec.new do |s|
   s.version		= package['version']
   s.authors		= { "Nick Italiano" => "ni6@njit.edu" }
   s.homepage    	= "https://github.com/@react-native-mapbox-gl/maps#readme"
-  s.source      	= { :git => "https://github.com/@react-native-mapbox-gl/maps.git" }
+  s.source      	= { :git => "https://github.com/naturalatlas/react-native-mapbox-gl.git", :branch => "8.5.0" }
   s.license     	= "MIT"
   s.platform    	= :ios, "8.0"
 
