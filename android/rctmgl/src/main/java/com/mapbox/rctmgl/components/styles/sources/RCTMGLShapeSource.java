@@ -100,7 +100,7 @@ public class RCTMGLShapeSource extends RCTSource<GeoJsonSource> {
                 mSource.setGeoJson(mShape);
             }
         } catch (Exception e) {
-            Log.w(LOG_TAG, exception);
+            Log.w(LOG_TAG, e);
         }
     }
 
