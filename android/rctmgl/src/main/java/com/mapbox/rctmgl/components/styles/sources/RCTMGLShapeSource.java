@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 import androidx.core.content.res.ResourcesCompat;
+import android.util.Log;
 
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
@@ -36,6 +37,7 @@ import java.util.Map;
  */
 
 public class RCTMGLShapeSource extends RCTSource<GeoJsonSource> {
+    public static final String LOG_TAG = "ShapeSource";
     private URL mURL;
     private RCTMGLShapeSourceManager mManager;
 
@@ -93,8 +95,12 @@ public class RCTMGLShapeSource extends RCTSource<GeoJsonSource> {
     public void setShape(String geoJSONStr) {
         mShape = geoJSONStr;
 
-        if (mSource != null && mMapView != null && !mMapView.isDestroyed() ) {
-            mSource.setGeoJson(mShape);
+        try {
+            if (mSource != null && mMapView != null && !mMapView.isDestroyed() ) {
+                mSource.setGeoJson(mShape);
+            }
+        } catch (Exception e) {
+            Log.w(LOG_TAG, exception);
         }
     }
 
